@@ -15,15 +15,20 @@
 	firebase.initializeApp(firebaseConfig);
 	firebase.analytics();
 
-	let signInLocation = "file:///Users/kevincheng/Documents/Kingston%2014-17-20/University%20Courses/portfolio_root_directory/pages/foodielist_root_directory/sign_in/sign_in.html";
-	let signOutLocation = "file:///Users/kevincheng/Documents/Kingston%2014-17-20/University%20Courses/portfolio_root_directory/pages/foodielist_root_directory/sign_in/sign_out.html";
-	let signUpLocation = "file:///Users/kevincheng/Documents/Kingston%2014-17-20/University%20Courses/portfolio_root_directory/pages/foodielist_root_directory/sign_in/sign_up.html";
-	let confirmationLocation = "file:///Users/kevincheng/Documents/Kingston%2014-17-20/University%20Courses/portfolio_root_directory/pages/foodielist_root_directory/sign_in/sign_up_confirmation.html";
+	// let signInLocation = "file:///Users/kevincheng/Documents/Kingston%2014-17-20/University%20Courses/portfolio_root_directory/pages/foodielist_root_directory/sign_in/sign_in.html";
+	// let signOutLocation = "file:///Users/kevincheng/Documents/Kingston%2014-17-20/University%20Courses/portfolio_root_directory/pages/foodielist_root_directory/sign_in/sign_out.html";
+	// let signUpLocation = "file:///Users/kevincheng/Documents/Kingston%2014-17-20/University%20Courses/portfolio_root_directory/pages/foodielist_root_directory/sign_in/sign_up.html";
+	// let confirmationLocation = "file:///Users/kevincheng/Documents/Kingston%2014-17-20/University%20Courses/portfolio_root_directory/pages/foodielist_root_directory/sign_in/sign_up_confirmation.html";
 
 	// let signInLocation = "http://liyuan-cheng.com/pages/foodielist_root_directory/sign_in/sign_in.html";
 	// let signOutLocation = "http://liyuan-cheng.com/pages/foodielist_root_directory/sign_in/sign_out.html";
 	// let signUpLocation = "http://liyuan-cheng.com/pages/foodielist_root_directory/sign_in/sign_up.html";
 	// let confirmationLocation = "http://liyuan-cheng.com/pages/foodielist_root_directory/sign_in/sign_up_confirmation.html";
+
+	let signInLocation = "../sign_in/sign_in.html";
+	let signOutLocation = "../sign_in/sign_out.html";
+	let signUpLocation = "../sign_in/sign_up.html";
+	let confirmationLocation = "../sign_in/sign_up_confirmation.html";
 
 	
 
