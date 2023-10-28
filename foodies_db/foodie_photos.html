@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Foodie's List - Discover</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../stylesheet/stylesheet_foodies_list.css">
+	<link rel="stylesheet" type="text/css" href="../stylesheet/stylesheet_navbar.css">
+</head>
+<body>
+	<div class="pos-f-t nav-header">
+		<nav class="navbar navbar-light bg-black">
+			<div id="logo-div">
+				<h1 class="">Foodie's List</h1>
+			</div>
+			<button class="navbar-toggler navbar-icon" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</nav>
+		<div class="collapse" id="navbarToggleExternalContent">
+			<div class="p-4 nav-list">
+				<a class="text-muted nav-a" href="foodie_photos.html">Discover</a>
+				<a class="text-muted nav-a" href="foodie_about.html">About</a>
+				<a class="text-muted nav-a" href="../sign_in/sign_out.html" onclick="return confirm('Are you sure you want to sign out?');">Sign Out</a>
+			</div>
+		</div>
+	</div>
+	<!-- <hr> -->
+	<div class="container container-flex">
+		<div class="row">
+			<div class="col col-0 col-md-1"></div>
+			<div id="foodie-photos-div" class="col col-12 col-md-10">
+				<!-- <div class="post-div">
+					<p class="photo-info">
+						<span class="font-bold">Foodie's Cam</span> • 
+						<span class="font-bold photo-time">40 minutes ago</span>
+						<br><span class="font-light">FREE FOOD!!! @Watt Hall</span>
+					</p>
+					<img class="photo-img" src="../img/pizza.jpg">
+				</div> -->
+				<!-- <div class="post-div">
+					<p class="photo-info"><span class="font-bold">Foodie's Cam</span> • <span class="font-bold photo-time">40 minutes ago</span><br>FREE FOOD!!! @Watt Hall</p>
+					<img class="photo-img" src="../img/pizza.jpg">
+				</div> -->
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<h1>Foodie's List</h1>
+		<h3>© 2020 Foodie’s List. All rights reserved</h3>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-storage.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+	     https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+
+	<script src="../config/config.js"></script>
+
+	<script>
+
+		// Your web app's Firebase configuration
+		// var firebaseConfig = {
+		// 	apiKey: "AIzaSyDujI_fylC3KoO0gkPMG-ygxs_jybortVo",
+		// 	authDomain: "foodie-s-list-46aab.firebaseapp.com",
+		// 	databaseURL: "https://foodie-s-list-46aab.firebaseio.com",
+		// 	projectId: "foodie-s-list-46aab",
+		// 	storageBucket: "foodie-s-list-46aab.appspot.com",
+		// 	messagingSenderId: "524635643063",
+		// 	appId: "1:524635643063:web:5ca68d3ce10e9d179b4132",
+		// 	measurementId: "G-EG2ZP9FPQ7"
+		// };
+		// // Initialize Firebase
+		// firebase.initializeApp(firebaseConfig);
+		// firebase.analytics();
+
+		var storage = firebase.storage();
+		var storageRef = storage.ref();
+		// var index = 0;
+		let displayElement = document.querySelector("#foodie-photos-div");
+		var photoList = [];
+		var sortedList = [];
+
+		var images = storageRef.listAll().then(function(result) {
+			console.log(result.items.length);
+
+			// let displayElement = document.querySelector("#foodie-photos-div");
+			while (displayElement.hasChildNodes()) {
+				displayElement.removeChild(displayElement.lastChild);
+			}
+
+			result.items.forEach(function(imageRef) {
+				// console.log("Image reference " + imageRef.toString());
+				// console.log(imageRef);
+				// index++;
+				photoList.push(imageRef);
+				// console.log(photoList);
+				// displayImages(imageRef);
+			});
+			sortingPhotos();
+		}).catch(function(error) {
+			console.log(error);
+		});
+
+		function sortingPhotos() {
+			let loop = 0;
+			sortedList = photoList.slice().sort(function(time1, time2) {
+				var a = nameToTimeStamp(time1);
+				var b = nameToTimeStamp(time2);
+				if (a > b) {
+					return -1;
+				}
+				if (a < b) {
+					return 1;
+				}
+				return 0;
+			});
+
+
+			if (sortedList.length > 20) {
+				loop = 20;
+			}
+			else {
+				loop = sortedList.length;
+			}
+			// console.log(loop);
+			for (let i = 0; i < loop; i++) {
+				// console.log(sortedList[i].name);
+				// console.log(sortedList[i]);
+				// setTimeout(function() {
+				// 	displayImages(sortedList[i]);
+				// }, 4000);
+				displayImages(sortedList[i], i);
+				// console.log(sortedList[i].name);
+			}
+			// displayList.push()
+		}
+
+		function nameToTimeStamp(image) {
+			let imageName = image.name;
+			let stringTime = imageName.replace(".jpg", "");
+			var intTime = parseInt(stringTime);
+			return intTime;
+		}
+
+		function displayImages(image, i) {
+			// console.log(image.url);
+			setTimeout (function() {
+				image.getDownloadURL().then(function(url) {
+					// console.log(url);
+
+					// let imageName = image.name;
+					// console.log(image.name);
+					// let stringTime = imageName.replace(".jpg", "");
+					// var intTime = parseInt(stringTime);
+					var timeStamp = new Date(nameToTimeStamp(image) * 1000);
+					var timeDiff = calculateTimeDiff(timeStamp);
+
+					// console.log(timeStamp);
+					// console.log(calculateTimeDiff(timeStamp));
+
+
+					let postElement = document.createElement("div");
+					postElement.classList.add("post-div");
+
+					let photoInfoCell = document.createElement("p");
+					photoInfoCell.classList.add("photo-info");
+
+					// let foodCamComponent = document.createElement("span");
+					// foodCamComponent.classList.add("font-bold");
+
+					// let timeComponent = document.createElement("span");
+					// timeComponent.classList.add("font-bold");
+					// timeComponent.classList.add("photo-time");
+
+					// let brComponent = document.createElement("br");
+
+					photoInfoCell.innerHTML = "<span class='font-bold'>Foodie's Cam</span> • <span class='font-bold photo-time'>" + timeDiff + "</span><br><span class='font-light'>FREE FOOD!!! @Watt Hall</span>";
+					// timeComponent.innerHTML = "40 minutes";
+					// let photoInfoSet = foodCamComponent + " • " + timeComponent + brComponent + "FREE FOOD!!! @Watt Hall";
+					// console.log(photoInfoSet);
+
+					// photoInfoCell.appendChild(photoInfoSet);
+
+					let photoIMGCell = document.createElement("img");
+					photoIMGCell.classList.add("photo-img");
+					photoIMGCell.src = url;
+
+					postElement.appendChild(photoInfoCell);
+					postElement.appendChild(photoIMGCell);
+
+					displayElement.appendChild(postElement);
+					console.log(image.name);
+				}).catch(function(error) {
+					console.log("get URL error");
+				});
+			}, 500 * i);
+			
+		}
+
+		function calculateTimeDiff(time) {
+			var now = new Date();
+			var past = new Date(time);
+			// var timeDiff = now.getFullYear() - past.getFullYear();
+			var timeDiff = now.getTime() - past.getTime();
+			var roundDiff = 0;
+			var timeDiffString;
+			// var yearDiff = timeDiff / (1000 * 60 * 60 * 24 * 365.25);
+
+			// Years Difference
+			timeDiff /= (1000 * 60 * 60 * 24 * 365.25);
+
+			if (timeDiff < 1) {
+				// Months Difference
+				// var monthDiff = timeDiff / (1000 * 60 * 60 * 24 * 7 * 4);
+				timeDiff = (timeDiff * 365.25) / (7 * 4);
+
+				if (timeDiff < 1) {
+					// Days Difference
+					// var dayDiff = temp / (1000 * 60 * 60 * 24);
+					timeDiff = timeDiff * 28;
+
+					if (timeDiff < 1) {
+						// Hours Difference
+						// var hourDiff = temp / (1000 * 60 * 60);
+						timeDiff = timeDiff * 24;
+
+						if (timeDiff < 1) {
+							// Minutes Difference
+							timeDiff *= 60;
+
+							
+							if (timeDiff < 1) {
+								// Seconds Difference 
+								timeDiff = timeDiff * 60;
+								roundDiff = Math.abs(Math.floor(timeDiff));
+								if (roundDiff == 1) {
+									timeDiffString = roundDiff + " second ago";
+								}
+								else {
+									timeDiffString = roundDiff + " seconds ago";
+								}
+							}
+							else {
+								roundDiff = Math.abs(Math.floor(timeDiff))
+								if (roundDiff == 1) {
+									timeDiffString = roundDiff + " minute ago";
+								}
+								else {
+									timeDiffString = roundDiff + " minutes ago";
+								}
+							}
+						}
+						else {
+							roundDiff = Math.abs(Math.floor(timeDiff))
+							if (roundDiff == 1) {
+								timeDiffString = roundDiff + " hour ago";
+							}
+							else {
+								timeDiffString = roundDiff + " hours ago";
+							}
+						}
+					}
+					else {
+						roundDiff = Math.abs(Math.floor(timeDiff))
+						if (roundDiff == 1) {
+							timeDiffString = roundDiff + " day ago";
+						}
+						else {
+							timeDiffString = roundDiff + " days ago";
+						}
+					}
+				}
+				else {
+					roundDiff = Math.abs(Math.floor(timeDiff))
+					if (roundDiff == 1) {
+						timeDiffString = roundDiff + " month ago";
+					}
+					else {
+						timeDiffString = roundDiff + " months ago";
+					}
+				}
+			}
+			else {
+				roundDiff = Math.abs(Math.floor(timeDiff))
+				if (roundDiff == 1) {
+					timeDiffString = roundDiff + " year ago";
+				}
+				else {
+					timeDiffString = roundDiff + " years ago";
+				}
+				// timeDiffString = Math.abs(Math.floor(timeDiff)) + " years ago";
+			}
+			return timeDiffString;
+		}
+
+		// console.log(images);
+
+		$(function(){
+	        $('.nav-a').each(function(){
+	            if ($(this).prop('href') == window.location.href) {
+	            	$(this).addClass('current-page');
+	            	$(this).removeClass('text-muted').addClass('text-dark');
+	                // $(this).addClass('active'); $(this).parents('li').addClass('active');
+	            }
+	        });
+	    });
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

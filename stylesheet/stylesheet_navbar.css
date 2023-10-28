@@ -1,0 +1,105 @@
+@font-face {
+	font-family: "Cafe";
+	src: url("../fonts/Cafe_Francoise.otf");
+} 
+
+@font-face {
+	font-family: "Lato Black";
+	src: url("../fonts/Lato-Black.ttf");
+}
+
+@font-face {
+	font-family: "Lato Bold";
+	src: url("../fonts/Lato-Bold.ttf");
+}
+
+@font-face {
+	font-family: "Lato Reg";
+	src: url("../fonts/Lato-Regular.ttf");
+}
+
+@font-face {
+	font-family: "Lato Light";
+	src: url("../fonts/Lato-Light.ttf");
+}
+
+.nav-header {
+	background-color: white;
+}
+
+.navbar-icon {
+	outline: none!important;
+	border: none!important;
+	transition: 0.2s;
+	transform: scale(1.1);
+}
+
+.nav-list {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	text-align: center;
+	/*padding: 0px!important;*/
+}
+
+.nav-a {
+	/*font-family: "Proxima Reg", sans-serif;*/
+	font-family: 'Lato Bold', sans-serif;
+	padding: 10px 0px 10px 0px;
+	font-size: 20px;
+	transition: 0.2s;
+	text-decoration: none!important;
+}
+
+.nav-a:hover {
+	/*color: #6392cc!important;*/
+	color: #D18787!important;
+}
+
+#logo-div {
+	font-family: "Cafe";
+	/*font-size: 48px;*/
+	/*padding-bottom: 0;*/
+}
+
+#logo-div h1 {
+	margin: 0;
+	/*font-size: 48px;*/
+	color: #D18787;
+}
+
+.current-page {
+	text-decoration: underline!important;
+}
+
+@media (min-width: 767px) {
+	#navbarToggleExternalContent {
+		display: block;
+		flex-grow: 1;
+	}
+
+	.nav-list {
+		width: 100%;
+		height: 100%;
+		align-items: center;
+		flex-direction: row;
+		justify-content: flex-end;
+		padding: 8px!important;
+	}
+
+	.nav-header {
+		width: 100%;
+		height: 90px;
+		display: inline-flex;
+	}
+
+	.nav-a {
+		margin: 0px 17px 0px 17px;
+		padding: 0;
+		/*font-size: px;*/
+	}
+
+	.navbar-icon {
+		display: none;
+	}
+}

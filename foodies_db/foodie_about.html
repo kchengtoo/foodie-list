@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Foodie's List - About</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../stylesheet/stylesheet_foodies_list.css">
+	<link rel="stylesheet" type="text/css" href="../stylesheet/stylesheet_navbar.css">
+</head>
+<body onload="initMap()">
+	<div class="pos-f-t nav-header">
+		<nav class="navbar navbar-light bg-black">
+			<div id="logo-div">
+				<h1 class="">Foodie's List</h1>
+			</div>
+			<button class="navbar-toggler navbar-icon" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</nav>
+		<div class="collapse" id="navbarToggleExternalContent">
+			<div class="p-4 nav-list">
+				<a class="text-muted nav-a" href="foodie_photos.html">Discover</a>
+				<a class="text-muted nav-a" href="foodie_about.html">About</a>
+				<a class="text-muted nav-a" href="../sign_in/sign_out.html" onclick="return confirm('Are you sure you want to sign out?');">Sign Out</a>
+			</div>
+		</div>
+	</div>
+	<!-- <hr> -->
+	<div class="container container-flex">
+		<div class="row row-space">
+			<div class="col col-0 col-lg-1"></div>
+			<div class="col col-12 col-lg-10">
+				<div id="introduction">
+					<h1>How does Foodie’s List work?</h1>
+					<p>There are two components in Foodie’s List: The website and the camera. The camera is called Foodie’s Cam, which takes photos of food that people want to share, and the photos are sent to a cloud storage that centralizes all photos taken. The website retrieves the photos from the storage and displays them, and let users know what food are up for grab. The purpose of Foodie’s List is to reduce food waste by providing free food to share. If the shared food are not finished by the end of the day, it will be given to the <a href="https://seip.usc.edu/tfp/">Trojan Food Pantry</a>, to ensure all food are put into good use.</p>
+				</div>
+				<div class="row">
+					<div class="col col-12">
+						<div id="introduction-img">
+							<img src="../img/foodie-list-system.svg">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row row-space">
+			<div class="col col-0 col-md-1"></div>
+			<div class="col col-12 col-md-5">
+				<div id="foodie-cam-img">
+					<img src="../img/foodie_cam_context_shot.jpg">
+				</div>
+			</div>
+			<div class="col col-12 col-md-5">
+				<div id="foodie-cam-info">
+					<h1>Foodie's Cam</h1>
+					<p>Foodie's Cam has a camera and a button that are mounted on a wall with a table next to it. The camera's len is positioned to face downwards, so it will only take photos of things that are on the table. You can use it by placing the food that you want to share on the table, and then press the button. The camera button has two LED lights on it: green and red. When you press the button, the light will go from green to red. While the red light is on, please do not press the button until the light goes back to green. The camera will take a photo and automatically upload the it directly to a cloud storage. You can go to Foodie's List's <a href="foodie_photos.html">Discover</a> page to see the photo, where it will display all the photos that the camera has taken.</p>
+				</div>
+			</div>
+		</div>
+		<div class="row row-space">
+			<div class="col col-0 col-md-1"></div>
+			<div class="col col-12 col-md-10">
+				<div id="location">
+					<h1>Where is Foodie's Cam</h1>
+					<p>Foodie’s Cam is currently located on the first floor of Roski’s Watt Hall next to WAH 104. If you have food that you want to share, stop by Foodie's Cam and let everyone know, or you can come by and get your free food if they are up for grab.</p>
+					<div class="row">
+						<div class="col col-12">
+							<div id="map" class="map"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row row-space">
+			<div class="col col-0 col-md-0 col-lg-1"></div>
+			<div class="col col-12 col-md-5 col-lg-5">
+				<div id="trojan-food-pantry-info">
+					<h1>No food goes to waste</h1>
+					<p>Where does the food go if they are not finished by the end of the day? Foodie’s List is working with Trojan Food Pantry and donates any food to the organization, so no food goes to waste.</p>
+					<p><a href="https://seip.usc.edu/tfp/">Click here for more info.</a></p>
+				</div>
+			</div>
+			<div class="col col-12 col-md-6 col-lg-5">
+				<div id="trojan-food-pantry-img">
+					<img src="../img/trojan-food-pantry.png">
+				</div>
+			</div>
+			<div class="col col-0 col-md-0 col-lg-1"></div>
+		</div>
+	</div>
+	<div id="footer">
+		<h1>Foodie's List</h1>
+		<h3>© 2020 Foodie’s List. All rights reserved</h3>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0eQhHXWqrCZ_Nx3vBf8aC9on4xcsmxKQ&callback=initMap"
+  		type="text/javascript"></script>
+
+  		<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+
+	<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+	<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
+
+	<!-- Add Firebase products that you want to use -->
+	<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+
+	<script src="../config/config.js"></script>
+	<script>
+
+		function initMap() {
+			var uluru = {lat: 34.019152, lng: -118.287961};
+			var map = new google.maps.Map(
+  			document.getElementById('map'), {zoom: 18, center: uluru});
+			var marker = new google.maps.Marker({position: uluru, map: map});
+		}
+
+
+		$(function(){
+	        $('.nav-a').each(function(){
+	            if ($(this).prop('href') == window.location.href) {
+	            	$(this).addClass('current-page');
+	            	$(this).removeClass('text-muted').addClass('text-dark');
+	                // $(this).addClass('active'); $(this).parents('li').addClass('active');
+	            }
+	        });
+	    });
+
+	    // $(document).ready(function() {
+	    // 	initMap();
+	    // });
+
+	    // document.querySelector()
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

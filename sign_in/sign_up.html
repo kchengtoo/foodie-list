@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign Up</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"> -->
+	<link rel="stylesheet" type="text/css" href="../stylesheet/stylesheet_sign_in.css">
+</head>
+<body>
+	<div class="body-container">
+		<div id="form-div" class="container">
+			<div class="container">
+				<div class="row">
+					<h1 id="web-title-h1" class="col col-12 mt-4 mb-4 display-3">Foodie's List</h1>
+				</div>
+				<div id="instruction-container">
+					<!-- <p class="instruction">Sign up to see what food are up for grab.</p> -->
+					<p class="instruction">Sign up with your USC email to see what food are up for grab!</p>
+				</div>
+			</div>
+			<div class="container">
+				<form id="sign-up-form">
+					<div class="row mb-3">
+						<div id="error-message" class="font-italic text-danger col-12 message">
+							<!-- <?php
+								if (isset($error) && !empty($error)) {
+									echo $error;
+								}
+							?> -->
+						</div>
+					</div>
+					<div class="form-group row">
+						<!-- <label for="email-id" class="col-3 col-form-label text-right">Email <span class="text-danger">*</span></label> -->
+						<div class="col-0 col-md-2"></div>
+						<div class="col-12 col-md-8">
+							<input type="email" class="form-control text-box" id="email-id" name="email" placeholder="USC email">
+							<small id="email-error" class="invalid-feedback">Please enter your USC email address</small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<!-- <label for="password-id" class="col-3 col-form-label text-right">Password <span class="text-danger">*</span></label> -->
+						<div class="col-0 col-md-2"></div>
+						<div class="col-12 col-md-8">
+							<input type="password" class="form-control text-box" id="password-id" name="password" placeholder="Password">
+							<small id="password-error" class="invalid-feedback">Please enter a password</small>
+						</div>
+					</div>
+					<!-- <div class="row">
+						<div class="col-0 col-md-2"></div>
+						<div class="col-12 col-md-8">
+							<span class="text-danger font-italic">* Required</span>
+						</div>
+					</div> -->
+					
+					<div class="form-group row">
+						<!-- <div class="col-3"></div> -->
+						<div class="col-0 col-md-2"></div>
+						<div class="col-12 col-md-8 mt-3 text-center">
+							<button type="submit" id="form-button" class="btn btn-primary">Sign Up</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 text-center">
+							<a href="sign_in.html" id="form-a">Already a user?</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+	<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+
+	<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+	<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
+
+	<!-- Add Firebase products that you want to use -->
+	<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+
+	<script src="../config/config.js"></script>
+
+	<script>
+		// firebase.auth().onAuthStateChanged(firebaseUser => {
+		// 	if (firebaseUser) {
+		// 		console.log(firebaseUser);
+		// 		// validSignUp = true;
+		// 		window.document.location = "../foodies_db/foodie_photos.html";
+		// 	}
+		// 	else {
+		// 		console.log("not logged in");
+		// 		// validSignUp = false;
+		// 		// window.document.location = "../sign_in/sign_in.html";
+		// 	}
+		// });
+
+		
+		const auth = firebase.auth();
+		let emailInput = document.getElementById("email-id");
+		let passwordInput = document.getElementById("password-id");
+		let errorMessage = document.getElementById("error-message");
+		let email;
+		let password;
+		// let validSignUp = false;
+
+		function uscEmailValidation() {
+			email = emailInput.value;
+			var emailAddressFormat = email.split("@").pop();
+			console.log(emailAddressFormat);
+			if (emailAddressFormat != "usc.edu") {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+
+		function signUp() {
+			// let validSignUp = false;
+			// var deferred = $.Deferred();
+			// let email = emailInput.value;
+			password = passwordInput.value;
+			inputValidation();
+			// uscEmailValidation();
+			// console.log("before " + validSignUp);
+			if (!document.querySelectorAll('.is-invalid').length > 0) {
+				if (uscEmailValidation()) {
+					const promise = auth.createUserWithEmailAndPassword(email, password).then(user => {
+						// validSignUp = true;
+						// console.log("then " + validSignUp);
+						window.document.location = "sign_up_confirmation.html";
+					}).catch(e => {
+						// validSignUp = false;
+						console.log(e.message);
+						// console.log("catch " + validSignUp);
+						// return false;
+						errorMessage.innerHTML = e.message;
+					});
+				}
+				else {
+					errorMessage.innerHTML = "Please enter a USC email";
+				}
+			}
+			
+			// deferred.resolve();
+			// console.log("after " + validSignUp);
+			// return validSignUp;
+			// return deferred.promise();
+			// return promise;
+		}
+
+		// firebase.auth().onAuthStateChanged(firebaseUser => {
+		// 	if (firebaseUser) {
+		// 		console.log(firebaseUser);
+		// 		// validSignUp = true;
+		// 	}
+		// 	else {
+		// 		console.log("not logged in");
+		// 		// validSignUp = false;
+		// 	}
+		// });
+		function inputValidation() {
+			if (document.querySelector('#email-id').value.trim().length == 0) {
+				document.querySelector('#email-id').classList.add('is-invalid');
+			}
+			else {
+				document.querySelector('#email-id').classList.remove('is-invalid');
+			}
+			if (document.querySelector('#password-id').value.trim().length == 0) {
+				document.querySelector('#password-id').classList.add('is-invalid');
+			}
+			else {
+				document.querySelector('#password-id').classList.remove('is-invalid');
+			}
+			// await signUp();
+		}
+
+		document.querySelector("#form-button").onclick = function() {
+			event.preventDefault();
+			errorMessage.innerHTML = null;
+			signUp();
+		}
+
+		// document.querySelector('form').onsubmit = async function() {
+		// 	// if (document.querySelector('#username-id').value.trim().length == 0) {
+		// 	// 	document.querySelector('#username-id').classList.add('is-invalid');
+		// 	// }
+		// 	// else {
+		// 	// 	document.querySelector('#username-id').classList.remove('is-invalid');
+		// 	// }
+		// 	// signUp();
+		// 	// await signUp();
+		// 	// let num = 0;
+		// 	// if (document.querySelector('#email-id').value.trim().length == 0) {
+		// 	// 	document.querySelector('#email-id').classList.add('is-invalid');
+		// 	// }
+		// 	// else {
+		// 	// 	document.querySelector('#email-id').classList.remove('is-invalid');
+		// 	// }
+		// 	// if (document.querySelector('#password-id').value.trim().length == 0) {
+		// 	// 	document.querySelector('#password-id').classList.add('is-invalid');
+		// 	// }
+		// 	// else {
+		// 	// 	document.querySelector('#password-id').classList.remove('is-invalid');
+		// 	// }
+		// 	// var promise = signUp();
+		// 	// promise.then(function(result) {
+		// 	// 	console.log("Results: " + result);
+		// 	// })
+		// 	// await signUp();
+		// 	// if (validSignUp == false) {
+		// 	// 	num++;
+		// 	// }
+		// 	// else {
+		// 	// 	num = 0;
+		// 	// }
+		// 	// console.log("result " + result);
+		// 	inputValidation();
+
+		// 	console.log("return " + validSignUp);
+		// 	return ( (!document.querySelectorAll('.is-invalid').length > 0) && (validSignUp == true));
+		// }
+	</script>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
