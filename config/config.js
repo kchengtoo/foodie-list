@@ -25,10 +25,10 @@
 	// let signUpLocation = "http://liyuan-cheng.com/pages/foodielist_root_directory/sign_in/sign_up.html";
 	// let confirmationLocation = "http://liyuan-cheng.com/pages/foodielist_root_directory/sign_in/sign_up_confirmation.html";
 
-	let signInLocation = "../sign_in/sign_in.html";
-	let signOutLocation = "../sign_in/sign_out.html";
-	let signUpLocation = "../sign_in/sign_up.html";
-	let confirmationLocation = "../sign_in/sign_up_confirmation.html";
+	let signInLocation = "https://kchengtoo.github.io/foodie-list/sign_in/sign_in.html";
+	let signOutLocation = "https://kchengtoo.github.io/foodie-list/sign_in/sign_out.html";
+	let signUpLocation = "https://kchengtoo.github.io/foodie-list/sign_in/sign_up.html";
+	let confirmationLocation = "https://kchengtoo.github.io/foodie-list/sign_in/sign_up_confirmation.html";
 
 	
 
